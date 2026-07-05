@@ -1062,17 +1062,19 @@ function montarPropostaPDF(){
   const refDoc = 'ROSALINDTEST-'+uf+'-'+hoje.getFullYear()+String(hoje.getMonth()+1).padStart(2,'0')+String(hoje.getDate()).padStart(2,'0');
 
   function brandBar(){
-    doc.setFillColor(31,58,95); doc.rect(0,0,W,26,'F');
-    doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.text('G3 HEALTH SERVICE', M, 17);
-    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.text('Proposta — RosalindTest: rastreio molecular de câncer de mama', W-M, 17, {align:'right'});
+    doc.setFillColor(31,58,95); doc.rect(0,0,W,48,'F');
+    doc.setTextColor(180,205,225); doc.setFont('helvetica','bold'); doc.setFontSize(8.5);
+    doc.text('G3 HEALTH SERVICE', M, 16);
+    doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(13);
+    doc.text('Proposta — RosalindTest: rastreio molecular de câncer de mama', W/2, 35, {align:'center'});
   }
   function header(subtitulo){
     brandBar();
-    doc.setTextColor(31,58,95); doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.text('Proposta — '+m[0]+'/'+uf, M, 46);
+    doc.setTextColor(31,58,95); doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.text('Proposta — '+m[0]+'/'+uf, M, 68);
     doc.setTextColor(110); doc.setFont('helvetica','normal'); doc.setFontSize(9);
-    doc.text(subtitulo+' · Ref. '+refDoc, M, 60);
-    doc.setDrawColor(230); doc.line(M, 68, W-M, 68);
-    return 82;
+    doc.text(subtitulo+' · Ref. '+refDoc, M, 82);
+    doc.setDrawColor(230); doc.line(M, 90, W-M, 90);
+    return 104;
   }
   function footer(){
     const pages = doc.internal.getNumberOfPages();
@@ -1084,7 +1086,7 @@ function montarPropostaPDF(){
 
   /* ---- página 1: cabeçalho formal tipo ofício + PNSB ---- */
   brandBar();
-  y = 54;
+  y = 72;
   doc.setTextColor(42,31,39); doc.setFont('helvetica','bold'); doc.setFontSize(14);
   doc.text('PROPOSTA TÉCNICA E COMERCIAL', M, y);
   doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(110);
