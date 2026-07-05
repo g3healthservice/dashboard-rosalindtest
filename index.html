@@ -1127,6 +1127,21 @@ function montarPropostaPDF(){
     y += linhas.length*11.5 + 16;
   });
 
+  /* ---- caixa de destaque: investimento estimado ---- */
+  y += 4;
+  const boxH = 54;
+  doc.setFillColor(234,246,244);
+  doc.setDrawColor(14,124,123); doc.setLineWidth(1.4);
+  doc.roundedRect(M, y, W-2*M, boxH, 6, 6, 'FD');
+  doc.setTextColor(80); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text('INVESTIMENTO ESTIMADO', M+18, y+23);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(120);
+  doc.text('(custo do programa)', M+18, y+37);
+  doc.setTextColor(31,58,95); doc.setFont('helvetica','bold'); doc.setFontSize(22);
+  doc.text('R$ '+Math.round(c.custoPrograma).toLocaleString('pt-BR'), W-M-18, y+35, {align:'right'});
+  doc.setLineWidth(0.5);
+  y += boxH + 12;
+
   /* ---- página 2: gráficos ---- */
   doc.addPage(); y = header('Síntese estatística — município, capital e estado');
   y += 14;
