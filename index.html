@@ -1094,7 +1094,9 @@ function montarPropostaPDF(){
   y += 14;
   doc.setFontSize(8.5); doc.setTextColor(140);
   doc.text('Referência: '+refDoc, M, y);
-  y += 22;
+  y += 11;
+  doc.text('Emitida em '+hoje.toLocaleDateString('pt-BR')+' às '+hoje.toLocaleTimeString('pt-BR'), M, y);
+  y += 20;
 
   doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(50);
   doc.text('Ao(À) '+(destNome ? destNome : 'Ilmo(a). Sr(a). Secretário(a) Municipal de Saúde'), M, y); y += 13;
@@ -1190,6 +1192,25 @@ function montarPropostaPDF(){
   const texto = 'Exame de sangue (biópsia líquida) que quantifica, por PCR digital duplex, a expressão de mRNA dos genes HIF-1alfa e GLUT1 (corte: 5 cópias/µL). É complementar à mamografia, não a substitui, e não realiza diagnóstico. Validado em coorte de 750 mulheres (24,9% com câncer): sensibilidade 90,65%, especificidade 96,47% — a comunidade científica descreve os estudos como iniciais, exigindo validação longitudinal maior. Laudo em 15–20 dias.';
   const linhas = doc.splitTextToSize(texto, W-2*M);
   doc.text(linhas, M, y); y += linhas.length*10 + 10;
+
+  /* ---- área de assinaturas (G3 + Gestor público) ---- */
+  y += 30;
+  if(y > H - 96){ doc.addPage(); y = header('Assinaturas') + 24; }
+  const colW = (W-2*M)/2, cx1 = M+colW/2, cx2 = M+colW+colW/2;
+  doc.setDrawColor(120); doc.setLineWidth(0.6);
+  doc.line(M+20, y, M+colW-20, y);
+  doc.line(M+colW+20, y, W-M-20, y);
+  y += 13;
+  doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(50);
+  doc.text('G3 Health Service', cx1, y, {align:'center'});
+  doc.text(destNome || ('Secretaria/Fundo Municipal de Saúde de '+m[0]+'/'+uf), cx2, y, {align:'center'});
+  y += 11;
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(110);
+  doc.text('Proponente', cx1, y, {align:'center'});
+  doc.text('Gestor público (Contratante)', cx2, y, {align:'center'});
+  y += 22;
+  doc.setFontSize(8.5); doc.setTextColor(130);
+  doc.text('Local e data: __________________________________, ______ / ______ / __________', M, y);
 
   footer();
 
